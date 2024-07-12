@@ -83,7 +83,7 @@ func sendLink(ctx *ext.Context, u *ext.Update) error {
 		file.ID,
 	)
 	hash := utils.GetShortHash(fullHash)
-	link := fmt.Sprintf("%s/stream/%d?code=%s", config.ValueOf.Host, messageID, hash)
+	link := fmt.Sprintf("%s/dl/%d?code=%s", config.ValueOf.Host, messageID, hash)
 	text := []styling.StyledTextOption{styling.Code(link)}
 	row := tg.KeyboardButtonRow{
 		Buttons: []tg.KeyboardButtonClass{
