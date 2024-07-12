@@ -26,6 +26,6 @@ func start(ctx *ext.Context, u *ext.Update) error {
 		ctx.Reply(u, "You are not allowed to use this bot.", nil)
 		return dispatcher.EndGroups
 	}
-	ctx.Reply(u, "Hi, send me any file to get a direct streamble link to that file.", nil)
+	ctx.Reply(u, "WELCOME " . chatId ."\n-------------------\nPadooTV will serve you a direct link once you upload media file\n-------------------\nNote!!\n\nAny media content should be respect the rules and regulation!\n\nNo pornographic content, will lead to permanent banned if pursue\n-------------------\nThanks for supporting us.", nil)
 	return dispatcher.EndGroups
 }
