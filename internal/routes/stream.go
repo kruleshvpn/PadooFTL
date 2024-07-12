@@ -33,9 +33,9 @@ func getStreamRoute(ctx *gin.Context) {
 		return
 	}
 
-	authHash := ctx.Query("hash")
+	authHash := ctx.Query("code")
 	if authHash == "" {
-		http.Error(w, "missing hash param", http.StatusBadRequest)
+		http.Error(w, "missing code param", http.StatusBadRequest)
 		return
 	}
 
@@ -58,7 +58,7 @@ func getStreamRoute(ctx *gin.Context) {
 		file.ID,
 	)
 	if !utils.CheckHash(authHash, expectedHash) {
-		http.Error(w, "invalid hash", http.StatusBadRequest)
+		http.Error(w, "invalid code", http.StatusBadRequest)
 		return
 	}
 
