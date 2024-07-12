@@ -85,17 +85,12 @@ func sendLink(ctx *ext.Context, u *ext.Update) error {
 	hash := utils.GetShortHash(fullHash)
 	linkdl := fmt.Sprintf("%s/dl/%d?code=%s", config.ValueOf.Host, messageID, hash)
 	linkst := fmt.Sprintf("%s/stream/%d?code=%s", config.ValueOf.Host, messageID, hash)
-	linkgt := fmt.Sprintf("%s/file/%d?code=%s", config.ValueOf.Host, messageID, hash)
 	text := []styling.StyledTextOption{styling.Code(link)}
 	row := tg.KeyboardButtonRow{
 		Buttons: []tg.KeyboardButtonClass{
 			&tg.KeyboardButtonURL{
 				Text: "Download",
 				URL:  linkdl + "&d=true",
-			},
-			&tg.KeyboardButtonURL{
-				Text: "Get File",
-				URL:  linkgt,
 			},
 		},
 	}
