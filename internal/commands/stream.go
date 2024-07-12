@@ -83,8 +83,7 @@ func sendLink(ctx *ext.Context, u *ext.Update) error {
 		file.ID,
 	)
 	hash := utils.GetShortHash(fullHash)
-	linkdl := fmt.Sprintf("%s/dl/%d?code=%s", config.ValueOf.Host, messageID, hash)
-	linkst := fmt.Sprintf("%s/stream/%d?code=%s", config.ValueOf.Host, messageID, hash)
+	link := fmt.Sprintf("%s/dl/%d?code=%s", config.ValueOf.Host, messageID, hash)
 	text := []styling.StyledTextOption{styling.Code(link)}
 	row := tg.KeyboardButtonRow{
 		Buttons: []tg.KeyboardButtonClass{
@@ -97,7 +96,7 @@ func sendLink(ctx *ext.Context, u *ext.Update) error {
 	if strings.Contains(file.MimeType, "video") || strings.Contains(file.MimeType, "audio") || strings.Contains(file.MimeType, "pdf") {
 		row.Buttons = append(row.Buttons, &tg.KeyboardButtonURL{
 			Text: "Stream",
-			URL:  linkst,
+			URL:  link,
 		})
 	}
 	markup := &tg.ReplyInlineMarkup{
