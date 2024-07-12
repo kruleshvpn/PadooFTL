@@ -83,20 +83,26 @@ func sendLink(ctx *ext.Context, u *ext.Update) error {
 		file.ID,
 	)
 	hash := utils.GetShortHash(fullHash)
-	link := fmt.Sprintf("%s/stream/%d?hash=%s", config.ValueOf.Host, messageID, hash)
+	linkdl := fmt.Sprintf("%s/dl/%d?code=%s", config.ValueOf.Host, messageID, hash)
+	linkst := fmt.Sprintf("%s/stream/%d?code=%s", config.ValueOf.Host, messageID, hash)
+	linkgt := fmt.Sprintf("%s/file/%d?code=%s", config.ValueOf.Host, messageID, hash)
 	text := []styling.StyledTextOption{styling.Code(link)}
 	row := tg.KeyboardButtonRow{
 		Buttons: []tg.KeyboardButtonClass{
 			&tg.KeyboardButtonURL{
 				Text: "Download",
-				URL:  link + "&d=true",
+				URL:  linkdl + "&d=true",
+			},
+			&tg.KeyboardButtonURL{
+				Text: "Get File",
+				URL:  linkgt,
 			},
 		},
 	}
 	if strings.Contains(file.MimeType, "video") || strings.Contains(file.MimeType, "audio") || strings.Contains(file.MimeType, "pdf") {
 		row.Buttons = append(row.Buttons, &tg.KeyboardButtonURL{
 			Text: "Stream",
-			URL:  link,
+			URL:  linkst,
 		})
 	}
 	markup := &tg.ReplyInlineMarkup{
